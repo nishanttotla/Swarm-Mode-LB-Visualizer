@@ -19,6 +19,19 @@
 <script>
 
 // TODO(nishanttotla): retrieve data by pinging service and parse
+var str = "Hitting backend 10.255.0.5 (count 26, version 2.0)"
+
+// parseTaskStats parses a string representing output for a single task
+// Form of output: Hitting backend 10.255.0.5 (count 26, version 2.0)
+function parseTaskStats(s) {
+  res = s.split(" ")
+  return {
+    "ip":res[2],
+    "count": parseInt(res[4]),
+    "version": res[6]
+  }
+}
+
 var data = [{"ip":"ip1", "count":4, "version":"1.0"},
         {"ip":"ip2", "count":8, "version":"1.0"},
         {"ip":"ip3", "count":15, "version":"1.0"},
