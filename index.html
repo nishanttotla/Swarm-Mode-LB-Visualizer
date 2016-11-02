@@ -75,7 +75,12 @@ function refreshChart() {
     .text(function(d) { return d.ip + " : " + d.count; });
 }
 
-// TODO(nishanttotla): below chart should refresh periodically and automatically
-refreshChart()
+// refresh chart periodically
+for (var i = 0; i < 50; i++) {
+  // retrieve new curl output
+  s = "Hitting backend ip1 (count 4, version 1.0)"
+  updateData(s)
+  refreshChart()
+}
 
 </script>
