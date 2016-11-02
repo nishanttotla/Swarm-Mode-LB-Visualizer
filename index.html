@@ -21,6 +21,13 @@
 // TODO(nishanttotla): retrieve data by pinging service and parse
 var str = "Hitting backend 10.255.0.5 (count 26, version 2.0)"
 
+var data = [{"ip":"ip1", "count":4, "version":"1.0"},
+        {"ip":"ip2", "count":8, "version":"1.0"},
+        {"ip":"ip3", "count":15, "version":"1.0"},
+        {"ip":"ip4", "count":42, "version":"2.0"},
+        {"ip":"ip5", "count":35, "version":"2.0"},
+        ];
+
 // parseTaskStats parses a string representing output for a single task
 // Form of output: Hitting backend 10.255.0.5 (count 26, version 2.0)
 function parseTaskStats(s) {
@@ -28,16 +35,24 @@ function parseTaskStats(s) {
   return {
     "ip":res[2],
     "count": parseInt(res[4]),
-    "version": res[6]
+    "version": res[6].slice(0,-1)
   }
 }
 
-var data = [{"ip":"ip1", "count":4, "version":"1.0"},
-        {"ip":"ip2", "count":8, "version":"1.0"},
-        {"ip":"ip3", "count":15, "version":"1.0"},
-        {"ip":"ip4", "count":42, "version":"2.0"},
-        {"ip":"ip5", "count":35, "version":"2.0"},
-        ];
+// updateData updates "data" using a new output for a single task
+// if the IP address is already present, it gets replaced
+// if not, a new field is added to "data"
+function updateData(s) {
+  newOutput = parseTaskStats(s)
+  task = data.find(function(d) { return d.ip === newOutput.ip})
+  // if this ip address exists
+  if(task) {
+    task.count = newOutput.count
+    task.version = newOutput.version
+  } else {
+    data.push(newOutput)
+  }
+}
 
 // TODO(nishanttotla): domain and range should be decided automatically
 var x = d3.scale.linear()
