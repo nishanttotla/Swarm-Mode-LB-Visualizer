@@ -31,17 +31,23 @@ var x = d3.scale.linear()
     .domain([0, 42])
     .range([0, 420]);
 
-d3.select(".chart")
-  .selectAll("div")
-    .data(data)
-  .enter().append("div")
+function refreshChart() {
+  d3.select(".chart").selectAll("div").remove()
+
+  chart = d3.select(".chart")
+            .selectAll("div")
+            .data(data)
+
+  chart.enter().append("div")
     .style("width", function(d) { return x(d.count) + "px"; })
     .style("height", "55px")
     .style("background-color", function(d) {
          if (d.version == "1.0") { return "steelblue" } else { return "red" }
         })
     .text(function(d) { return d.ip + " : " + d.count; });
+}
 
-// TODO(nishanttotla): above chart should refresh periodically
+// TODO(nishanttotla): below chart should refresh periodically and automatically
+refreshChart()
 
 </script>
