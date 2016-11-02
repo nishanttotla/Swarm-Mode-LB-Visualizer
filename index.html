@@ -75,6 +75,15 @@ function refreshChart() {
     .text(function(d) { return d.ip + " : " + d.count; });
 }
 
+// function httpGet()
+// {
+//   theUrl = "http://54.186.81.80:8008/count/"
+//   var xmlHttp = new XMLHttpRequest();
+//   xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+//   xmlHttp.send( null );
+//   return xmlHttp.responseText;
+// }
+
 // refresh chart periodically
 for (var i = 0; i < 50; i++) {
   // retrieve new curl output
