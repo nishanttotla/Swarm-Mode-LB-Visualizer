@@ -18,23 +18,26 @@
 <script src="d3.v3.min.js"></script>
 <script>
 
-var data = [4, 8, 15, 16, 23, 42];
-
-var data1 = [{"label":"ip1", "value":4},
-        {"label":"ip2", "value":8},
-        {"label":"ip3", "value":15},
+var data = [{"label":"ip1", "value":4, "version":"1.0"},
+        {"label":"ip2", "value":8, "version":"1.0"},
+        {"label":"ip3", "value":15, "version":"1.0"},
+        {"label":"ip4", "value":42, "version":"2.0"},
+        {"label":"ip5", "value":35, "version":"2.0"},
         ];
 
 var x = d3.scale.linear()
-    .domain([0, d3.max(data)])
+    .domain([0, 42])
     .range([0, 420]);
 
 d3.select(".chart")
   .selectAll("div")
     .data(data)
   .enter().append("div")
-    .style("width", function(d) { return x(d) + "px"; })
+    .style("width", function(d) { return x(d.value) + "px"; })
     .style("height", "55px")
-    .text(function(d) { return d; });
+    .style("background-color", function(d) {
+         if (d.version == "1.0") { return "steelblue" } else { return "red" }
+        })
+    .text(function(d) { return d.value; });
 
 </script>
