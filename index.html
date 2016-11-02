@@ -18,11 +18,11 @@
 <script src="d3.v3.min.js"></script>
 <script>
 
-var data = [{"label":"ip1", "value":4, "version":"1.0"},
-        {"label":"ip2", "value":8, "version":"1.0"},
-        {"label":"ip3", "value":15, "version":"1.0"},
-        {"label":"ip4", "value":42, "version":"2.0"},
-        {"label":"ip5", "value":35, "version":"2.0"},
+var data = [{"ip":"ip1", "count":4, "version":"1.0"},
+        {"ip":"ip2", "count":8, "version":"1.0"},
+        {"ip":"ip3", "count":15, "version":"1.0"},
+        {"ip":"ip4", "count":42, "version":"2.0"},
+        {"ip":"ip5", "count":35, "version":"2.0"},
         ];
 
 var x = d3.scale.linear()
@@ -33,11 +33,11 @@ d3.select(".chart")
   .selectAll("div")
     .data(data)
   .enter().append("div")
-    .style("width", function(d) { return x(d.value) + "px"; })
+    .style("width", function(d) { return x(d.count) + "px"; })
     .style("height", "55px")
     .style("background-color", function(d) {
          if (d.version == "1.0") { return "steelblue" } else { return "red" }
         })
-    .text(function(d) { return d.value; });
+    .text(function(d) { return d.ip + " : " + d.count; });
 
 </script>
