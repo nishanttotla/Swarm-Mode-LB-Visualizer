@@ -20,6 +20,11 @@
 
 var data = [4, 8, 15, 16, 23, 42];
 
+var data1 = [{"label":"ip1", "value":4},
+        {"label":"ip2", "value":8},
+        {"label":"ip3", "value":15},
+        ];
+
 var x = d3.scale.linear()
     .domain([0, d3.max(data)])
     .range([0, 420]);
@@ -29,6 +34,7 @@ d3.select(".chart")
     .data(data)
   .enter().append("div")
     .style("width", function(d) { return x(d) + "px"; })
+    .style("height", "55px")
     .text(function(d) { return d; });
 
 </script>
