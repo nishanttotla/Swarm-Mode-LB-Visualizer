@@ -28,8 +28,8 @@ var data = [{"ip":"ip1", "count":4, "version":"1.0"},
 
 // TODO(nishanttotla): domain and range should be decided automatically
 var x = d3.scale.linear()
-    .domain([0, 42])
-    .range([0, 420]);
+          .domain([0, 42])
+          .range([0, 420]);
 
 function refreshChart() {
   d3.select(".chart").selectAll("div").remove()
