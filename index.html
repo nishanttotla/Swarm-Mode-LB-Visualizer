@@ -18,6 +18,7 @@
 <script src="d3.v3.min.js"></script>
 <script>
 
+// TODO(nishanttotla): retrieve data by pinging service and parse
 var data = [{"ip":"ip1", "count":4, "version":"1.0"},
         {"ip":"ip2", "count":8, "version":"1.0"},
         {"ip":"ip3", "count":15, "version":"1.0"},
@@ -25,6 +26,7 @@ var data = [{"ip":"ip1", "count":4, "version":"1.0"},
         {"ip":"ip5", "count":35, "version":"2.0"},
         ];
 
+// TODO(nishanttotla): domain and range should be decided automatically
 var x = d3.scale.linear()
     .domain([0, 42])
     .range([0, 420]);
@@ -39,5 +41,7 @@ d3.select(".chart")
          if (d.version == "1.0") { return "steelblue" } else { return "red" }
         })
     .text(function(d) { return d.ip + " : " + d.count; });
+
+// TODO(nishanttotla): above chart should refresh periodically
 
 </script>
