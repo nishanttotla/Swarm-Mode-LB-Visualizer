@@ -1,5 +1,5 @@
 # Swarm-Mode-LB-Visualizer
-A simple histogram visualization of the Docker Swarm mode load balancing requests across tasks.
+A simple bar chart visualization of the Docker Swarm mode load balancing requests across tasks.
 
 Here's how to set it up.
 
@@ -25,4 +25,4 @@ You can edit the port number if necessary.
 
 ## Start visualization
 
-Open a web browser and go to http://localhost:8000. If all went well, you should see a histogram.
+Open a web browser and go to http://localhost:8000. If all went well, you should see a bar chart.
