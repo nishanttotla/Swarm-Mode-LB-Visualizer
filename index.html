@@ -87,7 +87,12 @@ function refreshEverything() {
   refreshChart()
 }
 
+function clearData() {
+  data = []
+}
+
 // refresh chart periodically here
 window.setInterval(refreshEverything, 2000)
+window.setInterval(clearData, 25000)
 
 </script>
