@@ -5,12 +5,12 @@
 <style>
 
 .chart div {
-  font: 10px sans-serif;
+  font: 17px sans-serif;
   background-color: steelblue;
   text-align: right;
   padding: 3px;
   margin: 1px;
-  color: white;
+  color: black;
 }
 
 </style>
@@ -21,12 +21,19 @@
 // TODO(nishanttotla): retrieve data by pinging service and parse
 var str = "Hitting backend 10.255.0.5 (count 26, version 2.0)"
 
-var data = [{"ip":"ip1", "count":4, "version":"1.0"},
-        {"ip":"ip2", "count":8, "version":"1.0"},
-        {"ip":"ip3", "count":15, "version":"1.0"},
-        {"ip":"ip4", "count":42, "version":"2.0"},
-        {"ip":"ip5", "count":35, "version":"2.0"},
-        ];
+var data = [];
+
+var psv = d3.dsv(" ", "text/plain");
+
+function readFromFile() {
+  psv("outputfile", function(d) {
+    // loop over d
+    for (var i = 0; i < d.length; i++) {
+      newOut = {"ip":d[i].field2, "count":parseInt(d[i].field4), "version":d[i].field6.slice(0,-1)}
+      updateData(newOut)
+    }
+  })
+}
 
 // parseTaskStats parses a string representing output for a single task
 // Form of output: Hitting backend 10.255.0.5 (count 26, version 2.0)
@@ -39,11 +46,11 @@ function parseTaskStats(s) {
   }
 }
 
-// updateData updates "data" using a new output for a single task
+// updateData updates "data" using a new output object for a single task
 // if the IP address is already present, it gets replaced
 // if not, a new field is added to "data"
-function updateData(s) {
-  newOutput = parseTaskStats(s)
+function updateData(newOutput) {
+  // newOutput = parseTaskStats(s)
   task = data.find(function(d) { return d.ip === newOutput.ip})
   // if this ip address exists
   if(task) {
@@ -75,21 +82,12 @@ function refreshChart() {
     .text(function(d) { return d.ip + " : " + d.count; });
 }
 
-// function httpGet()
-// {
-//   theUrl = "http://54.186.81.80:8008/count/"
-//   var xmlHttp = new XMLHttpRequest();
-//   xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
-//   xmlHttp.send( null );
-//   return xmlHttp.responseText;
-// }
-
-// refresh chart periodically
-for (var i = 0; i < 50; i++) {
-  // retrieve new curl output
-  s = "Hitting backend ip1 (count 4, version 1.0)"
-  updateData(s)
+function refreshEverything() {
+  readFromFile()
   refreshChart()
 }
+
+// refresh chart periodically here
+window.setInterval(refreshEverything, 2000)
 
 </script>
